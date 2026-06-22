@@ -44,6 +44,7 @@
     padding: 0 40px;
     display: flex; align-items: center; justify-content: space-between;
     height: 60px;
+    flex-wrap: wrap;
   }
   .nav-logo {
     font-family: 'Space Grotesk', sans-serif;
@@ -52,9 +53,10 @@
     display: flex; align-items: center; gap: 8px;
   }
   .nav-logo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent2); display: inline-block; }
-  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
   .nav-links a { text-decoration: none; color: var(--muted); font-size: .875rem; font-weight: 500; transition: color .2s; }
   .nav-links a:hover { color: var(--ink); }
+  .nav-links a.highlight { color: var(--accent); font-weight: 700; }
 
   /* HERO */
   .hero {
@@ -106,6 +108,7 @@
     background: var(--white);
     border-bottom: 1px solid var(--border);
     display: flex; justify-content: center; gap: 0;
+    flex-wrap: wrap;
   }
   .stat-item {
     padding: 24px 48px;
@@ -294,6 +297,11 @@
   .badge-spare { background: #EEF4FF; color: var(--accent); }
   .badge-service { background: var(--step2); color: var(--step2b); }
   .badge-both { background: #F5EEFF; color: #7C3AED; }
+  .badge-foc { background: #E6FAF2; color: var(--success); }
+  .badge-paid { background: #FFF8EC; color: var(--warn); }
+  .badge-open { background: #EEF4FF; color: var(--accent); }
+  .badge-progress { background: #FFF8EC; color: var(--warn); }
+  .badge-closed { background: #E6FAF2; color: var(--success); }
 
   /* ERP MODULES GRID */
   .modules-grid {
@@ -332,6 +340,7 @@
     background: var(--accent); color: #fff;
     padding: 12px 28px; border-radius: 8px; text-decoration: none;
     font-size: .9rem; font-weight: 600; transition: background .2s;
+    border: none; cursor: pointer; font-family: 'Inter', sans-serif;
   }
   .btn-primary:hover { background: #155fd4; }
   .btn-secondary {
@@ -353,6 +362,85 @@
   }
   footer strong { color: rgba(255,255,255,.8); }
 
+  /* ===== CRUD MANAGER ===== */
+  .manager-toolbar {
+    display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px;
+    align-items: center; justify-content: space-between;
+  }
+  .manager-toolbar .left { display: flex; gap: 10px; flex-wrap: wrap; }
+  .toolbar-input, .toolbar-select {
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 9px 12px; font-size: .85rem; font-family: 'Inter', sans-serif;
+    background: var(--white); color: var(--ink);
+  }
+  .btn-new {
+    background: var(--ink); color: #fff; border: none; border-radius: 8px;
+    padding: 10px 18px; font-size: .85rem; font-weight: 600; cursor: pointer;
+    transition: background .2s;
+  }
+  .btn-new:hover { background: var(--accent); }
+
+  .form-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 14px; padding: 26px; margin-bottom: 28px; display: none;
+  }
+  .form-card.open { display: block; }
+  .form-card h3 {
+    font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; margin-bottom: 18px;
+  }
+  .form-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px; margin-bottom: 16px;
+  }
+  .form-field label {
+    display: block; font-size: .75rem; font-weight: 600; color: var(--muted);
+    margin-bottom: 6px; text-transform: uppercase; letter-spacing: .04em;
+  }
+  .form-field input, .form-field select, .form-field textarea {
+    width: 100%; border: 1px solid var(--border); border-radius: 8px;
+    padding: 9px 12px; font-size: .85rem; font-family: 'Inter', sans-serif;
+    background: var(--surface); color: var(--ink);
+  }
+  .form-field textarea { resize: vertical; min-height: 60px; }
+  .form-actions { display: flex; gap: 10px; }
+  .btn-save {
+    background: var(--accent); color: #fff; border: none; border-radius: 8px;
+    padding: 10px 22px; font-size: .85rem; font-weight: 600; cursor: pointer;
+  }
+  .btn-save:hover { background: #155fd4; }
+  .btn-cancel {
+    background: var(--surface); color: var(--muted); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 22px; font-size: .85rem; font-weight: 600; cursor: pointer;
+  }
+  .btn-cancel:hover { background: var(--border); }
+
+  .req-table-wrap { overflow-x: auto; }
+  .req-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+  .req-table th {
+    background: var(--ink); color: #fff; font-size: .7rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: .06em; padding: 12px 14px; text-align: left; white-space: nowrap;
+  }
+  .req-table td { padding: 12px 14px; font-size: .82rem; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  .req-table tr:last-child td { border-bottom: none; }
+  .req-table tr:hover td { background: var(--surface); }
+  .row-actions { display: flex; gap: 6px; }
+  .icon-btn {
+    border: 1px solid var(--border); background: var(--white); border-radius: 6px;
+    padding: 5px 9px; font-size: .75rem; cursor: pointer; transition: background .15s;
+  }
+  .icon-btn:hover { background: var(--surface); }
+  .icon-btn.danger:hover { background: #FFEAEA; border-color: var(--danger); color: var(--danger); }
+  .empty-state {
+    text-align: center; padding: 50px 20px; color: var(--muted);
+    background: var(--white); border: 1px dashed var(--border); border-radius: 12px; font-size: .9rem;
+  }
+  .summary-strip { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+  .summary-pill {
+    background: var(--white); border: 1px solid var(--border); border-radius: 10px;
+    padding: 12px 18px; font-size: .8rem; color: var(--muted);
+  }
+  .summary-pill strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; color: var(--ink); }
+
   @media (max-width: 700px) {
     nav { padding: 0 20px; }
     .nav-links { display: none; }
@@ -363,6 +451,7 @@
     .cta-banner { margin: 0 20px 50px; padding: 36px 24px; }
     .divider { margin: 0 20px; }
     .arrow-row { display: none; }
+    .manager-toolbar { flex-direction: column; align-items: stretch; }
   }
 </style>
 </head>
@@ -377,6 +466,7 @@
     <li><a href="#workflow">Workflow</a></li>
     <li><a href="#foc">FOC Policy</a></li>
     <li><a href="#service-type">Service Type</a></li>
+    <li><a href="#manage" class="highlight">Manage Requests</a></li>
     <li><a href="#quotation">Quotation</a></li>
     <li><a href="#modules">ERP Modules</a></li>
   </ul>
@@ -387,15 +477,15 @@
   <div class="hero-eyebrow">RECONS ERP Pro Powered By ALOK</div>
   <h1>From Call Booking to<br><span>Closed Service Order</span></h1>
   <p>A structured 4-step ERP workflow to manage every after-sales request — from the first customer call to the final service quotation.</p>
-  <a href="#workflow" class="hero-cta">View Workflow →</a>
+  <a href="#manage" class="hero-cta">Open Request Manager →</a>
 </div>
 
 <!-- STATS STRIP -->
 <div class="stats-strip">
-  <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">Core Process Steps</div></div>
-  <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">Service Types</div></div>
-  <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Traceable Requests</div></div>
-  <div class="stat-item"><div class="stat-num">FOC</div><div class="stat-label">Auto-warranty Check</div></div>
+  <div class="stat-item"><div class="stat-num" id="statTotal">0</div><div class="stat-label">Total Requests</div></div>
+  <div class="stat-item"><div class="stat-num" id="statOpen">0</div><div class="stat-label">Open</div></div>
+  <div class="stat-item"><div class="stat-num" id="statFoc">0</div><div class="stat-label">FOC Cases</div></div>
+  <div class="stat-item"><div class="stat-num" id="statRevenue">₹0</div><div class="stat-label">Chargeable Revenue</div></div>
 </div>
 
 <!-- WORKFLOW SECTION -->
@@ -544,11 +634,141 @@
 
 <hr class="divider" />
 
+<!-- MANAGE / CRUD SECTION -->
+<section id="manage">
+  <div class="section-eyebrow">Live ERP Data</div>
+  <div class="section-title">Service Request Manager</div>
+  <p class="section-sub">Create, view, edit and delete service requests. Data is saved in your browser (localStorage) so it persists between visits on this device.</p>
+
+  <div class="summary-strip">
+    <div class="summary-pill">Total Requests<strong id="pillTotal">0</strong></div>
+    <div class="summary-pill">FOC Cases<strong id="pillFoc">0</strong></div>
+    <div class="summary-pill">Chargeable<strong id="pillPaid">0</strong></div>
+    <div class="summary-pill">Closed Orders<strong id="pillClosed">0</strong></div>
+  </div>
+
+  <div class="manager-toolbar">
+    <div class="left">
+      <input type="text" id="searchBox" class="toolbar-input" placeholder="Search customer, model, serial…" />
+      <select id="filterFoc" class="toolbar-select">
+        <option value="">All FOC Status</option>
+        <option value="FOC">FOC</option>
+        <option value="Chargeable">Chargeable</option>
+      </select>
+      <select id="filterStatus" class="toolbar-select">
+        <option value="">All Order Status</option>
+        <option value="Open">Open</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Closed">Closed</option>
+      </select>
+    </div>
+    <button class="btn-new" id="btnNewRequest">+ New Service Request</button>
+  </div>
+
+  <!-- FORM (Create / Update) -->
+  <div class="form-card" id="formCard">
+    <h3 id="formTitle">New Service Request</h3>
+    <form id="requestForm">
+      <input type="hidden" id="reqId" />
+      <div class="form-grid">
+        <div class="form-field">
+          <label>Customer Name *</label>
+          <input type="text" id="fCustomer" required />
+        </div>
+        <div class="form-field">
+          <label>Contact Number *</label>
+          <input type="text" id="fContact" required />
+        </div>
+        <div class="form-field">
+          <label>Product Model</label>
+          <input type="text" id="fModel" />
+        </div>
+        <div class="form-field">
+          <label>Serial Number</label>
+          <input type="text" id="fSerial" />
+        </div>
+        <div class="form-field">
+          <label>Purchase Date</label>
+          <input type="date" id="fPurchaseDate" />
+        </div>
+        <div class="form-field">
+          <label>Preferred Service Date</label>
+          <input type="date" id="fServiceDate" />
+        </div>
+        <div class="form-field">
+          <label>FOC Status *</label>
+          <select id="fFoc" required>
+            <option value="FOC">FOC — Free of Charge</option>
+            <option value="Chargeable">Chargeable</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Service Type *</label>
+          <select id="fType" required>
+            <option value="Spare">Spare Parts Only</option>
+            <option value="Service">Service Only</option>
+            <option value="Both">Spare + Service</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Spare Cost (₹)</label>
+          <input type="number" id="fSpareCost" min="0" step="0.01" value="0" />
+        </div>
+        <div class="form-field">
+          <label>Labour Cost (₹)</label>
+          <input type="number" id="fLabourCost" min="0" step="0.01" value="0" />
+        </div>
+        <div class="form-field">
+          <label>Order Status</label>
+          <select id="fStatus">
+            <option value="Open">Open</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Closed">Closed</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-field" style="margin-bottom:18px;">
+        <label>Complaint Description</label>
+        <textarea id="fComplaint" placeholder="Describe the issue reported by the customer…"></textarea>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn-save" id="btnSave">Save Request</button>
+        <button type="button" class="btn-cancel" id="btnCancel">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="req-table-wrap">
+    <table class="req-table" id="reqTable">
+      <thead>
+        <tr>
+          <th>Req. ID</th>
+          <th>Customer</th>
+          <th>Contact</th>
+          <th>Model / Serial</th>
+          <th>FOC</th>
+          <th>Type</th>
+          <th>Total (incl. GST)</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="reqTableBody">
+      </tbody>
+    </table>
+    <div class="empty-state" id="emptyState" style="display:none;">
+      No service requests yet. Click <strong>“+ New Service Request”</strong> to log your first call booking.
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
 <!-- QUOTATION SECTION -->
 <section id="quotation">
   <div class="section-eyebrow">Step 4 Output</div>
   <div class="section-title">Sample Service Quotation</div>
-  <p class="section-sub">A structured quotation is auto-generated by the ERP and sent to the customer for approval before work begins.</p>
+  <p class="section-sub">A structured quotation is auto-generated by the ERP and sent to the customer for approval before work begins. This is a static reference example — live quotations are calculated automatically per request in the Manager above.</p>
   <table class="quot-table">
     <thead>
       <tr>
@@ -641,7 +861,7 @@
   <h2>Ready to digitise your<br>after-sales process?</h2>
   <p>Deploy ServiceFlow ERP and bring every service request under one roof.</p>
   <div class="btn-group">
-    <a href="#workflow" class="btn-primary">Explore the Workflow</a>
+    <a href="#manage" class="btn-primary">Open Request Manager</a>
     <a href="mailto:contact@serviceflow.io" class="btn-secondary">Request a Demo</a>
   </div>
 </div>
@@ -650,6 +870,230 @@
 <footer>
   Built with <strong>ServiceFlow ERP</strong> · After-Sales & Service Management · Hosted on GitHub Pages
 </footer>
+
+<script>
+(function () {
+  const STORAGE_KEY = 'serviceflow_requests_v1';
+  const GST_RATE = 0.18;
+
+  const tableBody   = document.getElementById('reqTableBody');
+  const emptyState  = document.getElementById('emptyState');
+  const formCard    = document.getElementById('formCard');
+  const formTitle   = document.getElementById('formTitle');
+  const reqForm     = document.getElementById('requestForm');
+  const btnNew      = document.getElementById('btnNewRequest');
+  const btnCancel   = document.getElementById('btnCancel');
+  const searchBox   = document.getElementById('searchBox');
+  const filterFoc   = document.getElementById('filterFoc');
+  const filterStatus= document.getElementById('filterStatus');
+
+  function loadRequests() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch (e) {
+      console.error('Failed to load requests', e);
+      return [];
+    }
+  }
+
+  function saveRequests(list) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+  }
+
+  function genId() {
+    const list = loadRequests();
+    const n = list.length ? Math.max(...list.map(r => r.seq || 0)) + 1 : 1;
+    return { seq: n, display: 'SR-' + String(n).padStart(4, '0') };
+  }
+
+  function money(n) {
+    return '₹' + Number(n || 0).toLocaleString('en-IN', { maximumFractionDigits: 2 });
+  }
+
+  function computeTotal(req) {
+    if (req.focStatus === 'FOC') return 0;
+    const sub = Number(req.spareCost || 0) + Number(req.labourCost || 0);
+    return sub + sub * GST_RATE;
+  }
+
+  function statusBadgeClass(s) {
+    if (s === 'Closed') return 'badge-closed';
+    if (s === 'In Progress') return 'badge-progress';
+    return 'badge-open';
+  }
+
+  function typeBadgeClass(t) {
+    if (t === 'Spare') return 'badge-spare';
+    if (t === 'Service') return 'badge-service';
+    return 'badge-both';
+  }
+
+  function render() {
+    const list = loadRequests();
+    const q = (searchBox.value || '').toLowerCase().trim();
+    const fFoc = filterFoc.value;
+    const fStatus = filterStatus.value;
+
+    const filtered = list.filter(r => {
+      if (fFoc && r.focStatus !== fFoc) return false;
+      if (fStatus && r.status !== fStatus) return false;
+      if (q) {
+        const hay = [r.customer, r.model, r.serial, r.contact, r.displayId].join(' ').toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
+      return true;
+    });
+
+    tableBody.innerHTML = '';
+    emptyState.style.display = filtered.length ? 'none' : 'block';
+
+    filtered.slice().reverse().forEach(r => {
+      const tr = document.createElement('tr');
+      const total = computeTotal(r);
+      tr.innerHTML = `
+        <td>${r.displayId}</td>
+        <td>${escapeHtml(r.customer)}</td>
+        <td>${escapeHtml(r.contact)}</td>
+        <td>${escapeHtml(r.model || '—')}${r.serial ? ' / ' + escapeHtml(r.serial) : ''}</td>
+        <td><span class="badge ${r.focStatus === 'FOC' ? 'badge-foc' : 'badge-paid'}">${r.focStatus}</span></td>
+        <td><span class="badge ${typeBadgeClass(r.serviceType)}">${r.serviceType}</span></td>
+        <td>${r.focStatus === 'FOC' ? '<em style="color:#2DB87C;">Waived</em>' : money(total)}</td>
+        <td><span class="badge ${statusBadgeClass(r.status)}">${r.status}</span></td>
+        <td class="row-actions">
+          <button class="icon-btn" data-action="edit" data-id="${r.id}">✏️ Edit</button>
+          <button class="icon-btn danger" data-action="delete" data-id="${r.id}">🗑️ Delete</button>
+        </td>
+      `;
+      tableBody.appendChild(tr);
+    });
+
+    updateSummary(list);
+  }
+
+  function escapeHtml(str) {
+    return String(str || '').replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+  }
+
+  function updateSummary(list) {
+    const total = list.length;
+    const focCount = list.filter(r => r.focStatus === 'FOC').length;
+    const paidCount = list.filter(r => r.focStatus === 'Chargeable').length;
+    const closedCount = list.filter(r => r.status === 'Closed').length;
+    const open = list.filter(r => r.status !== 'Closed').length;
+    const revenue = list.reduce((sum, r) => sum + computeTotal(r), 0);
+
+    document.getElementById('pillTotal').textContent = total;
+    document.getElementById('pillFoc').textContent = focCount;
+    document.getElementById('pillPaid').textContent = paidCount;
+    document.getElementById('pillClosed').textContent = closedCount;
+
+    document.getElementById('statTotal').textContent = total;
+    document.getElementById('statOpen').textContent = open;
+    document.getElementById('statFoc').textContent = focCount;
+    document.getElementById('statRevenue').textContent = money(revenue);
+  }
+
+  function openForm(editing) {
+    formCard.classList.add('open');
+    formTitle.textContent = editing ? 'Edit Service Request' : 'New Service Request';
+    formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function closeForm() {
+    formCard.classList.remove('open');
+    reqForm.reset();
+    document.getElementById('reqId').value = '';
+  }
+
+  function fillForm(r) {
+    document.getElementById('reqId').value = r.id;
+    document.getElementById('fCustomer').value = r.customer || '';
+    document.getElementById('fContact').value = r.contact || '';
+    document.getElementById('fModel').value = r.model || '';
+    document.getElementById('fSerial').value = r.serial || '';
+    document.getElementById('fPurchaseDate').value = r.purchaseDate || '';
+    document.getElementById('fServiceDate').value = r.serviceDate || '';
+    document.getElementById('fFoc').value = r.focStatus || 'FOC';
+    document.getElementById('fType').value = r.serviceType || 'Spare';
+    document.getElementById('fSpareCost').value = r.spareCost || 0;
+    document.getElementById('fLabourCost').value = r.labourCost || 0;
+    document.getElementById('fStatus').value = r.status || 'Open';
+    document.getElementById('fComplaint').value = r.complaint || '';
+  }
+
+  btnNew.addEventListener('click', () => {
+    closeForm();
+    openForm(false);
+  });
+
+  btnCancel.addEventListener('click', () => {
+    closeForm();
+  });
+
+  reqForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const id = document.getElementById('reqId').value;
+    const list = loadRequests();
+
+    const data = {
+      customer: document.getElementById('fCustomer').value.trim(),
+      contact: document.getElementById('fContact').value.trim(),
+      model: document.getElementById('fModel').value.trim(),
+      serial: document.getElementById('fSerial').value.trim(),
+      purchaseDate: document.getElementById('fPurchaseDate').value,
+      serviceDate: document.getElementById('fServiceDate').value,
+      focStatus: document.getElementById('fFoc').value,
+      serviceType: document.getElementById('fType').value,
+      spareCost: parseFloat(document.getElementById('fSpareCost').value) || 0,
+      labourCost: parseFloat(document.getElementById('fLabourCost').value) || 0,
+      status: document.getElementById('fStatus').value,
+      complaint: document.getElementById('fComplaint').value.trim(),
+    };
+
+    if (id) {
+      const idx = list.findIndex(r => r.id === id);
+      if (idx !== -1) list[idx] = { ...list[idx], ...data };
+    } else {
+      const { seq, display } = genId();
+      list.push({ id: 'req_' + Date.now(), seq, displayId: display, ...data });
+    }
+
+    saveRequests(list);
+    closeForm();
+    render();
+  });
+
+  tableBody.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-action]');
+    if (!btn) return;
+    const id = btn.getAttribute('data-id');
+    const action = btn.getAttribute('data-action');
+    const list = loadRequests();
+    const r = list.find(x => x.id === id);
+    if (!r) return;
+
+    if (action === 'edit') {
+      fillForm(r);
+      openForm(true);
+    } else if (action === 'delete') {
+      if (confirm(`Delete service request ${r.displayId} for ${r.customer}? This cannot be undone.`)) {
+        const next = list.filter(x => x.id !== id);
+        saveRequests(next);
+        render();
+      }
+    }
+  });
+
+  searchBox.addEventListener('input', render);
+  filterFoc.addEventListener('change', render);
+  filterStatus.addEventListener('change', render);
+
+  render();
+})();
+</script>
 
 </body>
 </html>
